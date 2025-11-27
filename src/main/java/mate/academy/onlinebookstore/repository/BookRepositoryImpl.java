@@ -2,12 +2,12 @@ package mate.academy.onlinebookstore.repository;
 
 import jakarta.persistence.criteria.CriteriaQuery;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import mate.academy.onlinebookstore.exception.DataProcessingException;
 import mate.academy.onlinebookstore.model.Book;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 @Repository

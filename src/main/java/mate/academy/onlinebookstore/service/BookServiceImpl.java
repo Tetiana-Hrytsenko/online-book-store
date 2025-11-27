@@ -1,9 +1,9 @@
 package mate.academy.onlinebookstore.service;
 
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import mate.academy.onlinebookstore.model.Book;
 import mate.academy.onlinebookstore.repository.BookRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
