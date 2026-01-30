@@ -1,9 +1,9 @@
 package mate.academy.onlinebookstore.dto;
 
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
 import java.math.BigDecimal;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,12 +16,12 @@ public class CreateBookRequestDto {
     private String title;
     @NotBlank
     private String author;
-    @NotNull
+    @NotBlank
     @Pattern(regexp = ValidationConstants.ISBN_REGEX,
             message = ValidationConstants.INVALID_ISBN_FORMAT_MESSAGE)
     private String isbn;
     @NotNull
-    @Min(value = 0)
+    @Positive
     private BigDecimal price;
     private String description;
     private String coverImage;
