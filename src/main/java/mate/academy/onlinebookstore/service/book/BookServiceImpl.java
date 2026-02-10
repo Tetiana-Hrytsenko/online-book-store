@@ -1,7 +1,7 @@
-package mate.academy.onlinebookstore.service;
+package mate.academy.onlinebookstore.service.book;
 
 import lombok.RequiredArgsConstructor;
-import mate.academy.onlinebookstore.dto.BookDto;
+import mate.academy.onlinebookstore.dto.BookResponseDto;
 import mate.academy.onlinebookstore.dto.BookSearchParametersDto;
 import mate.academy.onlinebookstore.dto.CreateBookRequestDto;
 import mate.academy.onlinebookstore.exception.EntityNotFoundException;
@@ -22,27 +22,27 @@ public class BookServiceImpl implements BookService {
     private final BookSpecificationBuilder bookSpecificationBuilder;
 
     @Override
-    public BookDto save(CreateBookRequestDto requestDto) {
+    public BookResponseDto save(CreateBookRequestDto requestDto) {
         Book book = bookMapper.toModel(requestDto);
         bookRepository.save(book);
         return bookMapper.toDto(book);
     }
 
     @Override
-    public Page<BookDto> findAll(Pageable pageable) {
+    public Page<BookResponseDto> findAll(Pageable pageable) {
         return bookRepository.findAll(pageable)
                 .map(bookMapper::toDto);
     }
 
     @Override
-    public BookDto findBookById(Long id) {
+    public BookResponseDto findBookById(Long id) {
         Book book = bookRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Can't find book by id: " + id));
         return bookMapper.toDto(book);
     }
 
     @Override
-    public BookDto update(Long id, CreateBookRequestDto requestDto) {
+    public BookResponseDto update(Long id, CreateBookRequestDto requestDto) {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Can't find book by id: " + id));
         bookMapper.updateBookFromDto(requestDto, book);
@@ -55,7 +55,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Page<BookDto> search(BookSearchParametersDto searchParams, Pageable pageable) {
+    public Page<BookResponseDto> search(BookSearchParametersDto searchParams, Pageable pageable) {
         Specification<Book> bookSpecification = bookSpecificationBuilder.build(searchParams);
         return bookRepository.findAll(bookSpecification, pageable)
                 .map(bookMapper::toDto);
