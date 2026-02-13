@@ -18,7 +18,7 @@ public class CreateBookRequestDto {
     private String author;
     @NotBlank
     @Pattern(regexp = ValidationConstants.ISBN_REGEX,
-            message = ValidationConstants.INVALID_ISBN_FORMAT_MESSAGE)
+            message = "must be in ISBN-10 or ISBN-13 format.")
     private String isbn;
     @NotNull
     @Positive

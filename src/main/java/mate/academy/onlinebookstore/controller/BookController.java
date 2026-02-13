@@ -4,10 +4,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import mate.academy.onlinebookstore.dto.BookDto;
+import mate.academy.onlinebookstore.dto.BookResponseDto;
 import mate.academy.onlinebookstore.dto.BookSearchParametersDto;
 import mate.academy.onlinebookstore.dto.CreateBookRequestDto;
-import mate.academy.onlinebookstore.service.BookService;
+import mate.academy.onlinebookstore.service.book.BookService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -31,14 +31,14 @@ public class BookController {
     @GetMapping
     @Operation(summary = "Retrieve book catalog",
             description = "Returns a paginated list of books with optional sorting and filtering.")
-    public Page<BookDto> getAll(Pageable pageable) {
+    public Page<BookResponseDto> getAll(Pageable pageable) {
         return bookService.findAll(pageable);
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Get books by id",
             description = "Returns detailed information about a book by its identifier.")
-    public BookDto getBookById(@PathVariable Long id) {
+    public BookResponseDto getBookById(@PathVariable Long id) {
         return bookService.findBookById(id);
     }
 
@@ -47,7 +47,7 @@ public class BookController {
     @Operation(summary = "Create a new book",
             description = "Create a new book. Only users with admin role can perform this "
                     + "operation.")
-    public BookDto createBook(@RequestBody @Valid CreateBookRequestDto bookDto) {
+    public BookResponseDto createBook(@RequestBody @Valid CreateBookRequestDto bookDto) {
 
         return bookService.save(bookDto);
     }
@@ -56,8 +56,8 @@ public class BookController {
     @Operation(summary = "Update specific book",
             description = "Update specific book by id. Only users with admin role can perform "
                     + "this operation.")
-    public BookDto update(@PathVariable Long id,
-                          @RequestBody @Valid CreateBookRequestDto requestDto) {
+    public BookResponseDto update(@PathVariable Long id,
+                                  @RequestBody @Valid CreateBookRequestDto requestDto) {
         return bookService.update(id, requestDto);
     }
 
@@ -75,7 +75,8 @@ public class BookController {
             description = "Searches for books based on provided criteria such as title and author."
                     + "All search parameters are optional and can be combined."
                     + "Returns a paginated list of matching books")
-    public Page<BookDto> search(BookSearchParametersDto searchParameters, Pageable pageable) {
+    public Page<BookResponseDto> search(BookSearchParametersDto searchParameters,
+                                        Pageable pageable) {
         return bookService.search(searchParameters, pageable);
     }
 }

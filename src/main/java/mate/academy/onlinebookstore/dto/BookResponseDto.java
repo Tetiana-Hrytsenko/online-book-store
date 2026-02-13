@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class BookDto {
+public class BookResponseDto {
     private Long id;
     private String title;
     private String author;
