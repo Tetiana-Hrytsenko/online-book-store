@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-roles-table
+      author: tetiana-hrytsenko
+      changes:
+        - insert:
+            tableName: roles
+            columns:
+              - column: { name: name, value: ROLE_ADMIN }
+        - insert:
+            tableName: roles
+            columns:
+              - column: { name: name, value: ROLE_USER }
