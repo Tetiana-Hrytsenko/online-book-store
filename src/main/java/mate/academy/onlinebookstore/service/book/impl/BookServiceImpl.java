@@ -1,4 +1,4 @@
-package mate.academy.onlinebookstore.service.book;
+package mate.academy.onlinebookstore.service.book.impl;
 
 import lombok.RequiredArgsConstructor;
 import mate.academy.onlinebookstore.dto.BookResponseDto;
@@ -9,6 +9,7 @@ import mate.academy.onlinebookstore.mapper.BookMapper;
 import mate.academy.onlinebookstore.model.Book;
 import mate.academy.onlinebookstore.repository.book.BookRepository;
 import mate.academy.onlinebookstore.repository.book.BookSpecificationBuilder;
+import mate.academy.onlinebookstore.service.book.BookService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;

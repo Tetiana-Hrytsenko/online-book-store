@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-users
+      author: tetiana-hrytsenko
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column: {name: email, value: "admin@admin.com"}
+              - column: {name: password,
+                         value: "$2a$10$3dG6aKDeb4.1tIamvhQWguJjuBT6gtMRTVjAWjAcW5GTpYspRsXga"}
+              - column: {name: first_name, value: "Admin"}
+              - column: {name: last_name, value: "Admin"}
+              - column: {name: shipping_address, value: "admin"}
+        - insert:
+            tableName: users
+            columns:
+              - column: { name: email, value: "alice@example.com" }
+              - column: { name: password,
+                          value: "$2a$10$We0ecV7t9L7D3hbdAw3FEuR7muRQ2XT3Oj6Pb7/tUdosBZ5IpOJ.S" }
+              - column: { name: first_name, value: "Alice" }
+              - column: { name: last_name, value: "Grey" }
+              - column: { name: shipping_address, value: "1 Polarna St, Kyiv, Ukraine" }

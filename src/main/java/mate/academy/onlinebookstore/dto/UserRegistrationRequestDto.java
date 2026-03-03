@@ -23,7 +23,7 @@ public class UserRegistrationRequestDto {
     @NotBlank(message = "Password is required")
     @Size(min = 8, max = 35)
     @Pattern(regexp = ValidationConstants.PASSWORD_REGEX,
-            message = "Password must contain upper, lower case letters and digits.")
+            message = "must contain upper, lower case letters and digits.")
     @Schema(description = "User password. Min 8 characters, upper, lower case letters and digits.",
             example = "Pass@w0rd")
     private String password;
