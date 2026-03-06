@@ -6,6 +6,7 @@ import mate.academy.onlinebookstore.dto.UserLoginResponseDto;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,7 +15,8 @@ public class AuthenticationService {
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
 
-    public UserLoginResponseDto authenticate(UserLoginRequestDto requestDto) {
+    public UserLoginResponseDto authenticate(UserLoginRequestDto requestDto)
+            throws AuthenticationException {
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(requestDto.email(), requestDto.password())
         );
