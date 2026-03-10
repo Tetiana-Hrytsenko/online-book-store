@@ -2,7 +2,7 @@ package mate.academy.onlinebookstore.validation.fieldmatch;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import mate.academy.onlinebookstore.dto.UserRegistrationRequestDto;
+import mate.academy.onlinebookstore.dto.user.UserRegistrationRequestDto;
 
 public class FieldMatchValidator implements ConstraintValidator<
         FieldMatch,

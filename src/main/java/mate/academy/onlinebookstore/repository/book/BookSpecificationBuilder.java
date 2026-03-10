@@ -4,7 +4,7 @@ import static mate.academy.onlinebookstore.repository.book.spec.AuthorSpecificat
 import static mate.academy.onlinebookstore.repository.book.spec.TitleSpecificationProvider.TITLE;
 
 import lombok.RequiredArgsConstructor;
-import mate.academy.onlinebookstore.dto.BookSearchParametersDto;
+import mate.academy.onlinebookstore.dto.book.BookSearchParametersDto;
 import mate.academy.onlinebookstore.model.Book;
 import mate.academy.onlinebookstore.repository.SpecificationBuilder;
 import mate.academy.onlinebookstore.repository.SpecificationProviderManager;
