@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "Book management", description = "Endpoints for managing books")
 @RestController
-@RequestMapping("books")
+@RequestMapping("/books")
 @RequiredArgsConstructor
 public class BookController {
     private final BookService bookService;
@@ -43,7 +43,7 @@ public class BookController {
         return bookService.findBookById(id);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create a new book",
@@ -54,7 +54,7 @@ public class BookController {
         return bookService.save(bookDto);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     @Operation(summary = "Update specific book",
             description = "Update specific book by id. Only users with admin role can perform "
@@ -64,7 +64,7 @@ public class BookController {
         return bookService.update(id, requestDto);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete book",
