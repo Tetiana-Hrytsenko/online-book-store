@@ -1,5 +1,6 @@
 package mate.academy.onlinebookstore.service.category.impl;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import mate.academy.onlinebookstore.dto.book.BookDtoWithoutCategoryIds;
 import mate.academy.onlinebookstore.dto.category.CategoryDto;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;

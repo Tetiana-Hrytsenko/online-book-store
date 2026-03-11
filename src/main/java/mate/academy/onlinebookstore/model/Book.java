@@ -2,7 +2,6 @@ package mate.academy.onlinebookstore.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -42,7 +41,7 @@ public class Book {
     private String coverImage;
     @Column(nullable = false, columnDefinition = "TINYINT")
     private boolean isDeleted = false;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(
             name = "books_categories",
             joinColumns = @JoinColumn(name = "book_id"),

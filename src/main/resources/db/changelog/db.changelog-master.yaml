@@ -17,3 +17,5 @@ databaseChangeLog:
       file: db/changelog/changes/08-create-categories-table.yaml
   - include:
       file: db/changelog/changes/09-create-books-categories-table.yaml
+  - include:
+      file: db/changelog/changes/10-add-unique-constraint-to-name-in-categories-table.yaml
