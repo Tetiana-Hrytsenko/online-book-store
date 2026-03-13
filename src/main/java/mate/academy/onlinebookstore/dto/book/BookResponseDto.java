@@ -1,6 +1,7 @@
-package mate.academy.onlinebookstore.dto;
+package mate.academy.onlinebookstore.dto.book;
 
 import java.math.BigDecimal;
+import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,4 +15,5 @@ public class BookResponseDto {
     private BigDecimal price;
     private String description;
     private String coverImage;
+    private Set<Long> categoryIds;
 }

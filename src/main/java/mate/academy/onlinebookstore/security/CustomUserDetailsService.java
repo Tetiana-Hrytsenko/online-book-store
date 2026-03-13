@@ -1,4 +1,4 @@
-package mate.academy.onlinebookstore.service.user;
+package mate.academy.onlinebookstore.security;
 
 import lombok.RequiredArgsConstructor;
 import mate.academy.onlinebookstore.repository.user.UserRepository;

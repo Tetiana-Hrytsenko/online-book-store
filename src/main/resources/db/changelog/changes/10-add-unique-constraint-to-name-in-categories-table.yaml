@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-unique-constraint-to-name-in-categories-table
+      author: tetiana-hrytsenko
+      changes:
+        - addUniqueConstraint:
+            tableName: categories
+            columnNames: name
