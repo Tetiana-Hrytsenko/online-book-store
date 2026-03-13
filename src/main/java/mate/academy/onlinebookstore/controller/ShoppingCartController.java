@@ -9,7 +9,6 @@ import mate.academy.onlinebookstore.dto.shoppingcart.ShoppingCartResponseDto;
 import mate.academy.onlinebookstore.dto.shoppingcart.UpdateQuantityRequestDto;
 import mate.academy.onlinebookstore.model.User;
 import mate.academy.onlinebookstore.service.shoppingcart.ShoppingCartService;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -34,14 +33,13 @@ public class ShoppingCartController {
             description = "Add a specific book to authenticated user's shopping cart with "
                     + "optional sorting and filtering items")
     @PreAuthorize("hasRole('USER')")
-    @PostMapping()
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ShoppingCartResponseDto addItemToCart(@RequestBody
                                                  @Valid
                                                  AddItemToCartRequestDto requestDto,
-                                                 @AuthenticationPrincipal User user,
-                                                 Pageable pageable) {
-        return shoppingCartService.addItem(requestDto, user.getId(), pageable);
+                                                 @AuthenticationPrincipal User user) {
+        return shoppingCartService.addItem(requestDto, user.getId());
     }
 
     @Operation(summary = "Get shopping cart",
@@ -49,9 +47,8 @@ public class ShoppingCartController {
                     + "and filtering items")
     @PreAuthorize("hasRole('USER')")
     @GetMapping
-    public ShoppingCartResponseDto getShoppingCart(@AuthenticationPrincipal User user,
-                                                   Pageable pageable) {
-        return shoppingCartService.getShoppingCart(user.getId(), pageable);
+    public ShoppingCartResponseDto getShoppingCart(@AuthenticationPrincipal User user) {
+        return shoppingCartService.getShoppingCart(user.getId());
     }
 
     @Operation(summary = "Update book quantity",
@@ -62,10 +59,8 @@ public class ShoppingCartController {
                                                       @RequestBody
                                                       @Valid
                                                       UpdateQuantityRequestDto requestDto,
-                                                      @AuthenticationPrincipal User user,
-                                                      Pageable pageable) {
-        return shoppingCartService.updateBookQuantity(cartItemId, requestDto, user.getId(),
-                pageable);
+                                                      @AuthenticationPrincipal User user) {
+        return shoppingCartService.updateBookQuantity(cartItemId, requestDto, user.getId());
     }
 
     @Operation(summary = "Delete book",
