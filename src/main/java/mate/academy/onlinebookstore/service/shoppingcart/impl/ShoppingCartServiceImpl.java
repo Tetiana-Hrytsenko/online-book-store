@@ -14,7 +14,7 @@ import mate.academy.onlinebookstore.model.CartItem;
 import mate.academy.onlinebookstore.model.ShoppingCart;
 import mate.academy.onlinebookstore.model.User;
 import mate.academy.onlinebookstore.repository.book.BookRepository;
-import mate.academy.onlinebookstore.repository.item.CartItemRepository;
+import mate.academy.onlinebookstore.repository.cartitem.CartItemRepository;
 import mate.academy.onlinebookstore.repository.shoppingcart.ShoppingCartRepository;
 import mate.academy.onlinebookstore.service.shoppingcart.ShoppingCartService;
 import org.springframework.stereotype.Service;
@@ -80,5 +80,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Override
     public void deleteItem(Long id) {
         cartItemRepository.deleteById(id);
+    }
+
+    @Override
+    public void clear(ShoppingCart shoppingCart) {
+        shoppingCart.getCartItems().clear();
+        shoppingCartRepository.save(shoppingCart);
     }
 }
