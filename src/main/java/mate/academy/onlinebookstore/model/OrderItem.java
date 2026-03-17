@@ -1,17 +1,15 @@
 package mate.academy.onlinebookstore.model;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.MapsId;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import java.util.HashSet;
-import java.util.Set;
+import java.math.BigDecimal;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,22 +20,27 @@ import org.hibernate.annotations.SQLRestriction;
 @Getter
 @Setter
 @Entity
-@Table(name = "shopping_carts")
-@SQLDelete(sql = "UPDATE shopping_carts SET is_deleted = true WHERE id=?")
+@Table(name = "order_items")
+@SQLDelete(sql = "UPDATE order_items SET is_deleted = true WHERE id=?")
 @SQLRestriction(value = "is_deleted=false")
-public class ShoppingCart {
+public class OrderItem {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @MapsId
-    @JoinColumn(name = "id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "order_id", nullable = false)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    private User user;
-    @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Order order;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "book_id", nullable = false)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    private Set<CartItem> cartItems = new HashSet<>();
+    private Book book;
+    @Column(nullable = false)
+    private int quantity;
+    @Column(nullable = false)
+    private BigDecimal price;
     @Column(nullable = false, columnDefinition = "TINYINT")
     private boolean isDeleted = false;
 }
