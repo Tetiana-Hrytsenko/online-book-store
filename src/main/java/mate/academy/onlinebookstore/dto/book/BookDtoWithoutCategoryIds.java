@@ -3,9 +3,11 @@ package mate.academy.onlinebookstore.dto.book;
 import java.math.BigDecimal;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 @Getter
 @Setter
+@Accessors(chain = true)
 public class BookDtoWithoutCategoryIds {
     private Long id;
     private String title;
