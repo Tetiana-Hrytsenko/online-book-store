@@ -9,8 +9,10 @@ import java.math.BigDecimal;
 import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 import mate.academy.onlinebookstore.validation.ValidationConstants;
 
+@Accessors(chain = true)
 @Getter
 @Setter
 public class CreateBookRequestDto {
