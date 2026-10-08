@@ -7,9 +7,11 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 import mate.academy.onlinebookstore.validation.ValidationConstants;
 import mate.academy.onlinebookstore.validation.fieldmatch.FieldMatch;
 
+@Accessors(chain = true)
 @Getter
 @Setter
 @FieldMatch
