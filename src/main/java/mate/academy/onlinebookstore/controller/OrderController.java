@@ -10,6 +10,7 @@ import mate.academy.onlinebookstore.dto.order.OrderResponseDto;
 import mate.academy.onlinebookstore.dto.order.UpdateOrderStatusRequestDto;
 import mate.academy.onlinebookstore.model.User;
 import mate.academy.onlinebookstore.service.order.OrderService;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -47,7 +48,8 @@ public class OrderController {
     )
     @PreAuthorize("hasRole('USER')")
     @GetMapping
-    public Page<OrderResponseDto> getOrders(Pageable pageable, @AuthenticationPrincipal User user) {
+    public Page<OrderResponseDto> getOrders(@ParameterObject Pageable pageable,
+                                            @AuthenticationPrincipal User user) {
         return orderService.getOrders(pageable, user.getId());
     }
 
@@ -59,7 +61,7 @@ public class OrderController {
     @GetMapping("/{orderId}/items")
     public Page<OrderItemResponseDto> getOrderItems(
             @PathVariable Long orderId,
-            Pageable pageable) {
+            @ParameterObject Pageable pageable) {
         return orderService.getOrderItems(orderId, pageable);
     }
 

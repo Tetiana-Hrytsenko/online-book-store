@@ -8,6 +8,7 @@ import mate.academy.onlinebookstore.dto.book.BookResponseDto;
 import mate.academy.onlinebookstore.dto.book.BookSearchParametersDto;
 import mate.academy.onlinebookstore.dto.book.CreateBookRequestDto;
 import mate.academy.onlinebookstore.service.book.BookService;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -32,7 +33,7 @@ public class BookController {
     @GetMapping
     @Operation(summary = "Retrieve book catalog",
             description = "Returns a paginated list of books with optional sorting and filtering.")
-    public Page<BookResponseDto> getAll(Pageable pageable) {
+    public Page<BookResponseDto> getAll(@ParameterObject Pageable pageable) {
         return bookService.findAll(pageable);
     }
 
@@ -80,7 +81,7 @@ public class BookController {
                     + "All search parameters are optional and can be combined."
                     + "Returns a paginated list of matching books")
     public Page<BookResponseDto> search(BookSearchParametersDto searchParameters,
-                                        Pageable pageable) {
+                                        @ParameterObject Pageable pageable) {
         return bookService.search(searchParameters, pageable);
     }
 }
