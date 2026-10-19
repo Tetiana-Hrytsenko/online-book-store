@@ -44,25 +44,75 @@ The project was built to practice designing a layered Spring application (contro
 
 ## 🗂 Models and Relations
 
-- `User` - Registered customer: email, encoded password, first and last name, shipping address, roles, soft-delete flag
-- `Role` - `ROLE_USER` or `ROLE_ADMIN`
-- `Book` - Title, author, ISBN, price, description, cover image, categories, soft-delete flag
-- `Category` - Book category: name and description
-- `ShoppingCart` - One cart per user; shares its primary key with the user (`@MapsId`)
--  `CartItem` -  A book in a cart together with its quantity
--  `Order` - A customer's order: owner, status (`Status` enum), total price, order date (set automatically), shipping address, soft-delete flag
-- `OrderItem` - A book in an order together with its quantity and price
+```mermaid
+erDiagram
+    USERS }o--o{ ROLES : "has"
+    USERS ||--|| SHOPPING_CARTS : "owns (shared PK)"
+    USERS ||--o{ ORDERS : "places"
+    SHOPPING_CARTS ||--o{ CART_ITEMS : "contains"
+    CART_ITEMS }o--|| BOOKS : "refers to"
+    BOOKS }o--o{ CATEGORIES : "belongs to"
+    ORDERS ||--o{ ORDER_ITEMS : "contains"
+    ORDER_ITEMS }o--|| BOOKS : "refers to"
 
-Relations:
+    USERS {
+        bigint id PK
+        string email UK
+        string password "BCrypt hash"
+        string first_name
+        string last_name
+        string shipping_address
+        boolean is_deleted
+    }
+    ROLES {
+        bigint id PK
+        string name "ROLE_USER, ROLE_ADMIN"
+    }
+    BOOKS {
+        bigint id PK
+        string title
+        string author
+        string isbn UK
+        decimal price
+        string description
+        string cover_image
+        boolean is_deleted
+    }
+    CATEGORIES {
+        bigint id PK
+        string name
+        string description
+        boolean is_deleted
+    }
+    SHOPPING_CARTS {
+        bigint id PK, FK "same as users.id (@MapsId)"
+        boolean is_deleted
+    }
+    CART_ITEMS {
+        bigint id PK
+        bigint shopping_cart_id FK
+        bigint book_id FK
+        int quantity
+    }
+    ORDERS {
+        bigint id PK
+        bigint user_id FK
+        string status "Status enum"
+        decimal total
+        datetime order_date
+        string shipping_address
+        boolean is_deleted
+    }
+    ORDER_ITEMS {
+        bigint id PK
+        bigint order_id FK
+        bigint book_id FK
+        int quantity
+        decimal price
+        boolean is_deleted
+    }
+```
 
-- `User` → `Role`: many-to-many
-- `ShoppingCart` → `User`: one-to-one (shared primary key)
-- `ShoppingCart` ↔ `CartItem`: one-to-many
-- `CartItem` → `Book`: many-to-one
-- `Book` → `Category`: many-to-many
-- `Order` ↔ `OrderItem`: one-to-many
-- `OrderItem` → `Book`: many-to-one
--
 ## 📊 Project Structure
 
 ### Package layout
