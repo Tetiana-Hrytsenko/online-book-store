@@ -103,20 +103,20 @@ class ShoppingCartControllerTest {
     }
 
     @Test
-    @DisplayName("POST /cart returns 401 with anonymous user")
-    void addItemToCart_WithAnonymousUser_ReturnsUnauthorised() throws Exception {
+    @DisplayName("POST /cart returns 403 with anonymous user")
+    void addItemToCart_WithAnonymousUser_ReturnsForbidden() throws Exception {
 
         AddItemToCartRequestDto requestDto = new AddItemToCartRequestDto(1L, 2);
 
         mockMvc.perform(post("/cart")
                         .content(objectMapper.writeValueAsString(requestDto))
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isUnauthorized());
+                .andExpect(status().isForbidden());
     }
 
     @Test
     @DisplayName("POST /cart returns 403 with admin role")
-    void addItemToCart_WithAdminRole_ReturnsUnauthorised() throws Exception {
+    void addItemToCart_WithAdminRole_ReturnsForbidden() throws Exception {
         User testAdmin = userRepository.findUserByEmail(ADMIN_EMAIL).orElseThrow();
 
         AddItemToCartRequestDto requestDto = new AddItemToCartRequestDto(1L, 2);

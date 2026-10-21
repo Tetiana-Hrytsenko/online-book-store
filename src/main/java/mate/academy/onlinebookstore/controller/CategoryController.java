@@ -8,6 +8,7 @@ import mate.academy.onlinebookstore.dto.book.BookDtoWithoutCategoryIds;
 import mate.academy.onlinebookstore.dto.category.CategoryDto;
 import mate.academy.onlinebookstore.dto.category.CreateCategoryRequestDto;
 import mate.academy.onlinebookstore.service.category.CategoryService;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -44,7 +45,7 @@ public class CategoryController {
                     + "filtering."
     )
     @GetMapping
-    public Page<CategoryDto> getAll(Pageable pageable) {
+    public Page<CategoryDto> getAll(@ParameterObject Pageable pageable) {
         return categoryService.findAll(pageable);
     }
 
@@ -84,7 +85,9 @@ public class CategoryController {
                     + "sorting and filtering"
     )
     @GetMapping("/{id}/books")
-    public Page<BookDtoWithoutCategoryIds> getBooksByCategoryId(@PathVariable Long id,
+    public Page<BookDtoWithoutCategoryIds> getBooksByCategoryId(@PathVariable
+                                                                Long id,
+                                                                @ParameterObject
                                                                 Pageable pageable) {
         return categoryService.findAllByCategoryId(id, pageable);
     }
